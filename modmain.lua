@@ -1,3 +1,11 @@
+AddGamePostInit(function()
+  GLOBAL.scheduler:ExecutePeriodic(GLOBAL.FRAMES, function()
+    if not TheGlobalInstance then return end
+    local unopened = #GLOBAL.TheInventory:GetUnopenedItems()
+    if unopened > 0 then TheGlobalInstance:PushEvent('gift_received') end
+  end)
+end)
+
 AddClassPostConstruct('widgets/controls', function(self)
   if self.item_notification then self.item_notification:Hide() end
 end)

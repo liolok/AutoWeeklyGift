@@ -26,10 +26,11 @@ local GiftItemToast = Class(Widget, function(self, owner)
   self.name_text:SetHAlign(ANCHOR_MIDDLE)
   self.name_text:SetPosition(0, -10, 0)
 
-  self.inst:ListenForEvent('gift_recieved', function()
+  local function OnReceivedGift()
     local item = TheInventory:GetUnopenedItems()[1]
     if item ~= nil and not self.opening then self:ShowSkin(item.item_type, item.item_id) end
-  end, TheGlobalInstance)
+  end
+  self.inst:ListenForEvent('gift_received', OnReceivedGift, TheGlobalInstance)
 end)
 
 function GiftItemToast:ShowSkin(item, id)
