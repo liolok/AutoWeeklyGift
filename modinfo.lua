@@ -7,7 +7,7 @@ description = T(
   '无需科学机器即可获得每周皮肤！',
   '無需科學機器即可獲得每週皮膚！'
 )
-version = '2025.02.08.2'
+version = '2025.02.17'
 api_version = 10
 priority = 1.80085
 dst_compatible = true
