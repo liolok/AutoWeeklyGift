@@ -1,26 +1,21 @@
-AddGamePostInit(function()
-  GLOBAL.scheduler:ExecutePeriodic(GLOBAL.FRAMES, function()
-    if not TheGlobalInstance then return end
-    local unopened = #GLOBAL.TheInventory:GetUnopenedItems()
-    if unopened > 0 then TheGlobalInstance:PushEvent('gift_received') end
-  end)
-end)
+local G = GLOBAL
+
+local T = {
+  DEBUG_MODE = not MODROOT:find('workshop-') and false,
+  SKIN_QUEUE = {},
+}
+G.TUNING.AUTO_WEEKLY_GIFT = T
+
+if T.DEBUG_MODE then
+  local item = { item_id = 0, item_type = 'birdcage_pirate' }
+  G.TheInput:AddKeyUpHandler(G.KEY_F2, function() table.insert(T.SKIN_QUEUE, item) end)
+end
 
 AddClassPostConstruct('widgets/controls', function(self)
-  if self.item_notification then self.item_notification:Hide() end
-end)
-
-AddGlobalClassPostConstruct('frontend', 'FrontEnd', function(self)
-  local Widget = require('widgets/widget')
   local GiftItemToast = require('widgets/gift_item_toast')
 
-  if not self.fixoverlay then
-    self.fixoverlay = self.overlayroot:AddChild(Widget(''))
-    self.fixoverlay:SetVAnchor(GLOBAL.ANCHOR_MIDDLE)
-    self.fixoverlay:SetHAnchor(GLOBAL.ANCHOR_MIDDLE)
-    self.fixoverlay:SetScaleMode(GLOBAL.SCALEMODE_PROPORTIONAL)
-  end
+  if self.item_notification then self.item_notification:Hide() end
 
-  self.skinopen = self.fixoverlay:AddChild(GiftItemToast())
-  self.skinopen:SetPosition(-450, 250)
+  self.fox_item_notification = self.topleft_root:AddChild(GiftItemToast())
+  self.fox_item_notification:SetPosition(300, -115)
 end)
