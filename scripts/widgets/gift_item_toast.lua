@@ -63,7 +63,7 @@ function GiftItemToast:ShowSkin(item, id)
 end
 
 function GiftItemToast:OnUpdate(dt)
-  local item = SkinsUtils.GetSkins()[1]
+  local item = SkinsUtils.GetFirstUnopenedItem()
   if item and not self.opening then self:ShowSkin(item.item_type, item.item_id) end
 end
 
