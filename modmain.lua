@@ -1,14 +1,10 @@
 local G = GLOBAL
 
-local T = {
-  DEBUG_MODE = not MODROOT:find('workshop-') and false,
-  SKIN_QUEUE = {},
-}
-G.TUNING.AUTO_WEEKLY_GIFT = T
+TUNING.AUTO_WEEKLY_GIFT = {}
 
-if T.DEBUG_MODE then
-  local item = { item_id = 0, item_type = 'birdcage_pirate' }
-  G.TheInput:AddKeyUpHandler(G.KEY_F2, function() table.insert(T.SKIN_QUEUE, item) end)
+G.awg_test = function()
+  TUNING.AUTO_WEEKLY_GIFT.DEBUG_MODE = true
+  TUNING.AUTO_WEEKLY_GIFT.TEST_ITEM = { item_id = 0, item_type = 'birdcage_pirate' }
 end
 
 AddClassPostConstruct('widgets/controls', function(self)
