@@ -10,8 +10,11 @@ end
 AddClassPostConstruct('widgets/controls', function(self)
   local GiftItemToast = require('widgets/gift_item_toast')
 
-  if self.item_notification then self.item_notification:Hide() end
+  if self.item_notification and not self.is_item_notification_replaced then
+    self.item_notification:Hide()
+  end
 
-  self.fox_item_notification = self.topleft_root:AddChild(GiftItemToast())
-  self.fox_item_notification:SetPosition(300, -115)
+  self.item_notification = self.topleft_root:AddChild(GiftItemToast())
+  self.item_notification:SetPosition(300, -115)
+  self.is_item_notification_replaced = true
 end)
